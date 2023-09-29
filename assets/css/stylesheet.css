@@ -41,8 +41,10 @@ h2 {
     font-size:200%;
 }
 
-.choices {
+.container {
     display: none;
+    margin-bottom: 40px;
+    flex-direction: column;
 }
 
 #timer {
@@ -68,10 +70,28 @@ h2 {
 #d {
     color: white;
     background-color: #351C75;
-    border-radius: 5px;
+    border: none;
+    border-radius: 10px;
     width: 40%;
     margin: 10px 0;
-    padding: 7px 0 7px 15px;
+    padding: 12px 0 12px 15px;
     font-size: 125%;
     cursor: pointer;
+    text-align: left;
+}
+
+#a:hover,
+#b:hover,
+#c:hover, 
+#d:hover {
+    background-color: #BD60E7;
+} 
+
+#footer {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 5px;
+    border-top: 1px solid #9D9D9D;
+    font-size: 150%;
+    display: none;
 }
