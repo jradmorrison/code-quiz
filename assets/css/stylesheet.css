@@ -47,6 +47,32 @@ h2 {
     flex-direction: column;
 }
 
+.form {
+    font-size: 200%;
+    margin: 0 auto;
+}
+
+.form input {
+    width: 200px;
+    height: 30px;
+    
+}
+
+.form button {
+    background:#351C75;
+    cursor:pointer;
+    font-size:50%;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin-left: 10px;
+}
+
+.form button:hover {
+    background: #BD60E7;
+}
+
 #timer {
     position:absolute; 
     right:20px;

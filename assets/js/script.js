@@ -83,7 +83,7 @@ function startTimer() {
       secondsLeft--;
       timerEl.innerHTML = `Time Left: ${secondsLeft}`;
   
-      if(secondsLeft === 0) {
+      if(secondsLeft <= 0) {
        
         clearInterval(timerInterval);
         submitScore()
@@ -159,7 +159,9 @@ function checkAnswer(event) {
 
 // ============== submit score =======================
 function submitScore() {
-  
+  score = secondsLeft;
+  h1El.innerHTML = 'All done!';
+  h2El.innerHTML = `Your final score is ${score}!`;
 }
 
 init();
