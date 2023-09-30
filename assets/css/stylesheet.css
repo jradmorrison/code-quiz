@@ -9,7 +9,7 @@ body {
 }
 
 header {
-    padding: 20px; 
+    padding: 20px 30px; 
     font-size: 24px; 
     display: flex; 
     width: 100vw; 
@@ -49,24 +49,34 @@ h2 {
 
 .form {
     font-size: 200%;
-    margin: 0 auto;
+    margin: 25px auto;
+    display: none;
+    align-items: center;
 }
 
 .form input {
-    width: 200px;
-    height: 30px;
-    
+    width: 250px;
+    height: 35px;
+    margin: 0 15px;
+    outline: none;
+    border: 2px solid #9D9D9D;
+}
+
+.form input:focus {
+    outline: none;
+    border: 2px solid lightblue;
+    border-radius: 2px;
+    font-size: 60%;
 }
 
 .form button {
     background:#351C75;
     cursor:pointer;
-    font-size:50%;
+    font-size:60%;
     color: white;
     border: none;
     border-radius: 5px;
     padding: 5px 15px;
-    margin-left: 10px;
 }
 
 .form button:hover {

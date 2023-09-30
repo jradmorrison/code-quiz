@@ -40,8 +40,11 @@ var choiceB = document.getElementById('b');
 var choiceC = document.getElementById('c');
 var choiceD = document.getElementById('d');
 var footEl = document.getElementById('footer');
+var submitForm = document.querySelector('.form');
+var input = document.getElementById('input');
+var submitBtn = document.getElementById('submit');
 
-// ================================= Other variables =========================================
+// ================================= Global variables =========================================
 var heading = `Coding Quiz Challenge`;
 h2El.innerHTML = `Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!`;
 
@@ -51,6 +54,9 @@ var currentQuestion;
 var questionIndex;
 var secondsLeft = 60;
 var score;
+var timerInterval;
+
+var users = []
 
 
 
@@ -79,7 +85,7 @@ function startQuiz() {
 // =================== Function for timer ==============================
 function startTimer() {
 
-    var timerInterval = setInterval(function() {
+    timerInterval = setInterval(function() {
       secondsLeft--;
       timerEl.innerHTML = `Time Left: ${secondsLeft}`;
   
@@ -130,7 +136,8 @@ function generateQuestion() {
 
     olEl.addEventListener('click', checkAnswer)
   } else {
-    submitScore()
+    clearInterval(timerInterval);
+    submitScore();
 }
 }
 
@@ -162,6 +169,25 @@ function submitScore() {
   score = secondsLeft;
   h1El.innerHTML = 'All done!';
   h2El.innerHTML = `Your final score is ${score}!`;
+  olEl.setAttribute('style', 'display:none;')
+  submitForm.setAttribute('style', 'display:flex;');
+
+  submitBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    console.log('click')
+    var initials = input.value.trim();
+    
+    if (initials === "") {
+      return;
+    }
+   
+    users.push(initials);
+    users.push(score);
+    console.log(users);
+    // initials.value = "";
+   
+   
+  });
 }
 
 init();
