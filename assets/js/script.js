@@ -34,28 +34,32 @@ var timerEl = document.getElementById('timer');
 var h1El = document.getElementById('h1');
 var h2El = document.getElementById('h2');
 var btnEl = document.getElementById('start');
-var olEl = document.querySelector('.choices')
+var olEl = document.querySelector('.container')
 var choiceA = document.getElementById('a');
 var choiceB = document.getElementById('b');
 var choiceC = document.getElementById('c');
 var choiceD = document.getElementById('d');
+var footEl = document.getElementById('footer');
 
 // ================================= Other variables =========================================
 var heading = `Coding Quiz Challenge`;
 h2El.innerHTML = `Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!`;
 
 
-var allQuestions = jsQuestions;
-var questionIndex = 0;
+var allQuestions = jsQuestions; 
+var currentQuestion;
+var questionIndex;
 var secondsLeft = 60;
+var score;
 
-// ===================================== Element styling ==================================
+
 
 // ====================================== Functions ======================================
 
 // =============== Function for Landing page ======================
 function init() {
 
+  questionIndex = 0;
   h1El.innerHTML = heading;
   h2El.innerHTML = `Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!`;
   btnEl.addEventListener('click', startQuiz)
@@ -65,12 +69,11 @@ function init() {
 function startQuiz() {
     console.log(`Quiz Started`);
     startTimer();
-    h1El.innerHTML = 'question 1'
+    
     h2El.innerHTML = '';
-    highScoresEl.setAttribute('style', 'display:none;')
     btnEl.setAttribute('style', 'display:none;')
-    olEl.setAttribute('style', 'display:block;')
-
+    olEl.setAttribute('style', 'display:flex;')
+    generateQuestion();
 }
 
 // =================== Function for timer ==============================
@@ -80,20 +83,86 @@ function startTimer() {
       secondsLeft--;
       timerEl.innerHTML = `Time Left: ${secondsLeft}`;
   
-      if(secondsLeft === 0) {
+      if(secondsLeft <= 0) {
        
         clearInterval(timerInterval);
-        sendMessage();
+        submitScore()
       }
   
     }, 1000);
 }
 
-// ============= Function to send message that time is up ======================
-function sendMessage() {
-      console.log(`Times Up!`)
-      h1El.innerHTML = `Times Up!`
+// ============= Function to send message then hide again ======================
+function sendMessage(text, color) {
+
+  footEl.innerHTML = text;
+  footEl.setAttribute('style', `color:${color}; display:block;`);
+  setTimeout(hideMessage, 2000);
 }
 
+function hideMessage() {
+  footEl.setAttribute('style', 'display:none;')
+}
+
+//  ================== Generate question ============================
+function generateQuestion() {
+
+  if (questionIndex < 5) {
+    console.log(allQuestions)
+    currentQuestion = allQuestions[questionIndex]
+  
+    console.log(currentQuestion)
+    h1El.innerHTML = currentQuestion.title
+  
+    choiceA.innerHTML = currentQuestion.choices[0]
+    choiceA.setAttribute('data-answer', currentQuestion.choices[0])
+    choiceB.innerHTML = currentQuestion.choices[1]
+    choiceB.setAttribute('data-answer', currentQuestion.choices[1])
+    choiceC.innerHTML = currentQuestion.choices[2]
+    choiceC.setAttribute('data-answer', currentQuestion.choices[2])
+    choiceD.innerHTML = currentQuestion.choices[3]
+    choiceD.setAttribute('data-answer', currentQuestion.choices[3])
+  
+    console.log(currentQuestion.answer)
+    
+    questionIndex++
+    console.log(questionIndex)
+
+    olEl.addEventListener('click', checkAnswer)
+  } else {
+    submitScore()
+}
+}
+
+// ================ Check answer ==================
+function checkAnswer(event) {
+
+  console.log(event.target.dataset.answer);
+
+  var choice = event.target.dataset.answer;
+
+  if (choice === currentQuestion.answer) {
+
+    console.log(`correct`);
+    sendMessage("correct!", "#009705");
+
+  } else {
+
+    console.log(`incorrect`);
+    secondsLeft = secondsLeft - 10;
+    sendMessage("wrong!", "#B40000");
+
+  };
+
+  generateQuestion();
+}
+
+// ============== submit score =======================
+function submitScore() {
+  score = secondsLeft;
+  h1El.innerHTML = 'All done!';
+  h2El.innerHTML = `Your final score is ${score}!`;
+}
 
 init();
+

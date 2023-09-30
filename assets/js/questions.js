@@ -34,7 +34,7 @@ const jsQuestions = [
       choices: [
         "let",
         "variable",
-        "var",
+        "give",
         "const",
       ],
       answer: "let",
