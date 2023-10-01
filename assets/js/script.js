@@ -1,31 +1,3 @@
-/*
-
-== variables to keep track of game state ==
-
-current question
-time remaining
-
-
-submit button dom element
-timer element
-answers to choose from
-score - can just be tied in with timer
-
-
-function to pull question from questions array
-assign all answers to a button by looping over the choice array
-compare choice selected against answer
-
-function for click event
-
-if statement it matches the answer, then you move on to the next question, else decrement time the timer
-
-save highscore to local storage
-
-call highscores from a button on homepage
-sort high scores to decending order
-
-*/
 
 // =========================== Defining elements as variables ==============================
 
@@ -35,7 +7,7 @@ var timerEl = document.getElementById('timer');
 var h1El = document.getElementById('h1');
 var h2El = document.getElementById('h2');
 var btnEl = document.getElementById('start');
-var olEl = document.querySelector('.container')
+var choicesEl = document.querySelector('.container')
 var choiceA = document.getElementById('a');
 var choiceB = document.getElementById('b');
 var choiceC = document.getElementById('c');
@@ -46,6 +18,8 @@ var input = document.getElementById('input');
 var submitBtn = document.getElementById('submit');
 var hiScoreDiv = document.querySelector('.high-scores');
 var olEl = document.getElementById('ol');
+var homeEl = document.getElementById('home');
+var clearEl = document.getElementById('clear');
 
 // ================================= Global variables =========================================
 
@@ -71,16 +45,23 @@ function init() {
   btnEl.addEventListener('click', startQuiz);
   highScoresEl.addEventListener('click', showHighScores);
 
+  hiScoreDiv.setAttribute('style', 'display:none;');
+  btnEl.setAttribute('style', 'display:block;');
+  h2El.setAttribute('style', 'display:block;');
+  highScoresEl.setAttribute('style', 'display:block;');
+
+
 return };
 
 // ================ Function for starting the quiz =================
 function startQuiz() {
     console.log(`Quiz Started`);
+    timerEl.setAttribute('style', 'display:block;');
     startTimer();
     
     h2El.innerHTML = '';
     btnEl.setAttribute('style', 'display:none;');
-    olEl.setAttribute('style', 'display:flex;');
+    choicesEl.setAttribute('style', 'display:flex;');
     generateQuestion();
 };
 
@@ -124,7 +105,7 @@ function generateQuestion() {
     questionIndex++
     console.log(questionIndex)
 
-    olEl.addEventListener('click', checkAnswer)
+    choicesEl.addEventListener('click', checkAnswer)
   } else {
     clearInterval(timerInterval);
     submitScore();
@@ -171,7 +152,8 @@ function submitScore() {
   score = secondsLeft;
   h1El.innerHTML = 'All done!';
   h2El.innerHTML = `Your final score is ${score}!`;
-  olEl.setAttribute('style', 'display:none;')
+  choicesEl.setAttribute('style', 'display:none;');
+  timerEl.setAttribute('style', 'display:none;');
   submitForm.setAttribute('style', 'display:flex;');
 
   submitBtn.addEventListener("click", function(event) {
@@ -197,16 +179,25 @@ function submitScore() {
 
 function showHighScores() {
 
+  clearInterval(timerInterval);
   h1El.innerHTML = 'High scores';
   h2El.setAttribute('style', 'display:none;');
+  timerEl.setAttribute('style', 'display:none;');
   submitForm.setAttribute('style', 'display:none;');
   btnEl.setAttribute('style', 'display:none;');
   hiScoreDiv.setAttribute('style', 'display:flex;');
+  highScoresEl.setAttribute('style', 'display:none;');
+  choicesEl.setAttribute('style', 'display:none;')
 
 
   highScores = getHighScores();
-  sortHighScores(score);
+  sortHighScores();
   console.log(highScores);
+
+  if (highScores == 0) {
+    h2El.innerHTML = 'No high scores saved yet! Complete the quiz to recieve a score.';
+    h2El.setAttribute('style', 'display:block;');
+  }
 
   for (let index = 0; index < highScores.length; index++) {
     var li1 = document.createElement('li');
@@ -214,7 +205,10 @@ function showHighScores() {
     ol.appendChild(li1);
   }
 
-return };
+  homeEl.addEventListener('click', init)
+  clearEl.addEventListener('click', clearData)
+
+};
 
 function addHighScore(newHighScore) {
   highScores = getHighScores();
@@ -242,6 +236,10 @@ function sortHighScores() {
   return highScores;
 }
 
-
+function clearData() {
+  localStorage.clear();
+  sendMessage('High scores cleared!', 'black');
+  init();
+}
 
 init();
