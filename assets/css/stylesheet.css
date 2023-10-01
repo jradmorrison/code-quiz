@@ -9,7 +9,7 @@ body {
 }
 
 header {
-    padding: 20px; 
+    padding: 20px 30px; 
     font-size: 24px; 
     display: flex; 
     width: 100vw; 
@@ -17,9 +17,10 @@ header {
     position:absolute; 
     top:0;
 }
-header a {
+header p {
     color: #B753E3;
     text-decoration: none;
+    cursor: pointer;
 }
 
 main {
@@ -41,6 +42,16 @@ h2 {
     font-size:200%;
 }
 
+ol li {
+    background-color: #D9D3E9;
+    width: 400px;
+    margin: 5px 0;
+    padding: 5px 10px;
+    font-weight: 500;
+    list-style-type: decimal;
+}
+
+/* Class Selectors */
 .container {
     display: none;
     margin-bottom: 40px;
@@ -49,30 +60,65 @@ h2 {
 
 .form {
     font-size: 200%;
-    margin: 0 auto;
+    margin: 25px auto;
+    display: none;
+    align-items: center;
 }
 
 .form input {
-    width: 200px;
-    height: 30px;
-    
+    width: 250px;
+    height: 35px;
+    margin: 0 15px;
+    outline: none;
+    border: 2px solid #9D9D9D;
+}
+
+.form input:focus {
+    outline: none;
+    border: 2px solid lightblue;
+    border-radius: 2px;
+    font-size: 60%;
 }
 
 .form button {
     background:#351C75;
     cursor:pointer;
-    font-size:50%;
+    font-size:60%;
     color: white;
     border: none;
     border-radius: 5px;
     padding: 5px 15px;
-    margin-left: 10px;
 }
 
 .form button:hover {
     background: #BD60E7;
 }
 
+.high-scores {
+    max-width: 400px;
+    font-size: 200%;
+    margin: 25px auto;
+    display: none;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.high-scores button {
+    background: #351C75;
+    cursor: pointer;
+    font-size: 60%;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 10px 5px;
+}
+
+.high-scores button:hover {
+    background: #BD60E7;
+}
+
+/* ID selectors */
 #timer {
     position:absolute; 
     right:20px;

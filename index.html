@@ -9,7 +9,7 @@
 </head>
 <body>
     <header id="header">
-        <a id="high-scores" href="">View high scores</a>
+        <p id="high-scores" href="">View high scores</p>
         <div id="timer"></div>
     </header>
     <main id="main">
@@ -18,15 +18,21 @@
         <button id="start">Start Quiz</button>
     <!-- Questions list -->
         <div class="container">
-            <button id="a" data-answer="">Choice</button>
-            <button id="b" data-answer="">Choice</button>
-            <button id="c" data-answer="">Choice</button>
-            <button id="d" data-answer="">Choice</button>
+            <button id="a" data-answer=""></button>
+            <button id="b" data-answer=""></button>
+            <button id="c" data-answer=""></button>
+            <button id="d" data-answer=""></button>
         </div>
+    <!-- Submit initials form -->
         <div class="form">
             Enter initials:
-            <input type="text">
-            <button>Submit</button>
+            <input type="text" id="input">
+            <button id="submit">Submit</button>
+        </div>
+        <div class="high-scores">
+            <ol id="ol"></ol>
+            <button id="home">Home</button>
+            <button id="clear">Clear high scores</button>
         </div>
     <!-- Footer -->
         <footer id="footer"></footer>
