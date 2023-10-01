@@ -28,6 +28,7 @@ sort high scores to decending order
 */
 
 // =========================== Defining elements as variables ==============================
+
 var headEl = document.getElementById('header');
 var highScoresEl = document.getElementById('high-scores');
 var timerEl = document.getElementById('timer');
@@ -43,22 +44,21 @@ var footEl = document.getElementById('footer');
 var submitForm = document.querySelector('.form');
 var input = document.getElementById('input');
 var submitBtn = document.getElementById('submit');
+var hiScoreDiv = document.querySelector('.high-scores');
+var olEl = document.getElementById('ol');
 
 // ================================= Global variables =========================================
-var heading = `Coding Quiz Challenge`;
-h2El.innerHTML = `Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!`;
-
 
 var allQuestions = jsQuestions; 
 var currentQuestion;
 var questionIndex;
 var secondsLeft = 60;
 var score;
+var initials;
 var timerInterval;
-
-var users = []
-
-
+var highScores = [];
+var newHighScore = {initials, score};
+var sortedHighScores = [];
 
 // ====================================== Functions ======================================
 
@@ -66,10 +66,12 @@ var users = []
 function init() {
 
   questionIndex = 0;
-  h1El.innerHTML = heading;
+  h1El.innerHTML = `Coding Quiz Challenge`;
   h2El.innerHTML = `Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!`;
-  btnEl.addEventListener('click', startQuiz)
-}
+  btnEl.addEventListener('click', startQuiz);
+  highScoresEl.addEventListener('click', showHighScores);
+
+return };
 
 // ================ Function for starting the quiz =================
 function startQuiz() {
@@ -77,10 +79,10 @@ function startQuiz() {
     startTimer();
     
     h2El.innerHTML = '';
-    btnEl.setAttribute('style', 'display:none;')
-    olEl.setAttribute('style', 'display:flex;')
+    btnEl.setAttribute('style', 'display:none;');
+    olEl.setAttribute('style', 'display:flex;');
     generateQuestion();
-}
+};
 
 // =================== Function for timer ==============================
 function startTimer() {
@@ -95,20 +97,8 @@ function startTimer() {
         submitScore()
       }
   
-    }, 1000);
-}
+    }, 1000)};
 
-// ============= Function to send message then hide again ======================
-function sendMessage(text, color) {
-
-  footEl.innerHTML = text;
-  footEl.setAttribute('style', `color:${color}; display:block;`);
-  setTimeout(hideMessage, 2000);
-}
-
-function hideMessage() {
-  footEl.setAttribute('style', 'display:none;')
-}
 
 //  ================== Generate question ============================
 function generateQuestion() {
@@ -138,8 +128,7 @@ function generateQuestion() {
   } else {
     clearInterval(timerInterval);
     submitScore();
-}
-}
+}};
 
 // ================ Check answer ==================
 function checkAnswer(event) {
@@ -162,7 +151,20 @@ function checkAnswer(event) {
   };
 
   generateQuestion();
+};
+
+// ============= Function to send message then hide again ======================
+function sendMessage(text, color) {
+
+  footEl.innerHTML = text;
+  footEl.setAttribute('style', `color:${color}; display:block;`);
+  setTimeout(hideMessage, 2000);
 }
+
+function hideMessage() {
+  footEl.setAttribute('style', 'display:none;')
+}
+
 
 // ============== submit score =======================
 function submitScore() {
@@ -174,21 +176,72 @@ function submitScore() {
 
   submitBtn.addEventListener("click", function(event) {
     event.preventDefault();
-    console.log('click')
     var initials = input.value.trim();
+    initials = initials.toUpperCase();
     
     if (initials === "") {
+      sendMessage('Please enter your initials', 'black')
       return;
+    } else {
+        newHighScore = {
+          initials: initials,
+          score: score
+      };
     }
-   
-    users.push(initials);
-    users.push(score);
-    console.log(users);
-    // initials.value = "";
-   
-   
+    console.log(newHighScore);
+
+    addHighScore(newHighScore);
+    showHighScores();
   });
 }
 
-init();
+function showHighScores() {
 
+  h1El.innerHTML = 'High scores';
+  h2El.setAttribute('style', 'display:none;');
+  submitForm.setAttribute('style', 'display:none;');
+  btnEl.setAttribute('style', 'display:none;');
+  hiScoreDiv.setAttribute('style', 'display:flex;');
+
+
+  highScores = getHighScores();
+  sortHighScores(score);
+  console.log(highScores);
+
+  for (let index = 0; index < highScores.length; index++) {
+    var li1 = document.createElement('li');
+    li1.innerHTML = `${highScores[index].initials} - ${highScores[index].score}`;
+    ol.appendChild(li1);
+  }
+
+return };
+
+function addHighScore(newHighScore) {
+  highScores = getHighScores();
+  highScores.push(newHighScore);
+  addData(highScores);
+}
+
+function addData() {
+  localStorage.setItem('highScores', JSON.stringify(highScores));
+}
+
+function getHighScores() {
+  var storedHighScores = localStorage.getItem('highScores');
+  var emptyArr = [];
+  if (JSON.parse(storedHighScores)) {
+    return JSON.parse(storedHighScores);
+  } else {
+    return emptyArr;
+  }
+
+}
+
+function sortHighScores() {
+  highScores.sort((a,b)=>b.score-a.score);
+  return highScores;
+}
+
+
+
+init();
