@@ -26,7 +26,7 @@ var clearEl = document.getElementById('clear');
 var allQuestions = jsQuestions; 
 var currentQuestion;
 var questionIndex;
-var secondsLeft = 60;
+var secondsLeft;
 var score;
 var initials;
 var timerInterval;
@@ -55,6 +55,7 @@ return };
 
 // ================ Function for starting the quiz =================
 function startQuiz() {
+
     console.log(`Quiz Started`);
     timerEl.setAttribute('style', 'display:block;');
     startTimer();
@@ -68,6 +69,7 @@ function startQuiz() {
 // =================== Function for timer ==============================
 function startTimer() {
 
+  secondsLeft = 60;
     timerInterval = setInterval(function() {
       secondsLeft--;
       timerEl.innerHTML = `Time Left: ${secondsLeft}`;
@@ -177,6 +179,7 @@ function submitScore() {
   });
 }
 
+// ==================== Show high scores ==========================
 function showHighScores() {
 
   clearInterval(timerInterval);
@@ -205,21 +208,24 @@ function showHighScores() {
     ol.appendChild(li1);
   }
 
-  homeEl.addEventListener('click', init)
+  homeEl.addEventListener('click', reloadPage)
   clearEl.addEventListener('click', clearData)
 
 };
 
+// ====================== Add high score =======================
 function addHighScore(newHighScore) {
   highScores = getHighScores();
   highScores.push(newHighScore);
   addData(highScores);
 }
 
+// ================= Store high scores ======================
 function addData() {
   localStorage.setItem('highScores', JSON.stringify(highScores));
 }
 
+// ===================== Retrieve high scores ====================
 function getHighScores() {
   var storedHighScores = localStorage.getItem('highScores');
   var emptyArr = [];
@@ -231,15 +237,21 @@ function getHighScores() {
 
 }
 
+// ================== Sort high scores =======================
 function sortHighScores() {
   highScores.sort((a,b)=>b.score-a.score);
   return highScores;
 }
 
+// ==================== Clear high scores =====================
 function clearData() {
   localStorage.clear();
   sendMessage('High scores cleared!', 'black');
-  init();
+  reloadPage();
+}
+
+function reloadPage() {
+  location.reload()
 }
 
 init();
