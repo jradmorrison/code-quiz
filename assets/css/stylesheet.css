@@ -12,7 +12,7 @@ header {
     padding: 20px 30px; 
     font-size: 24px; 
     display: flex; 
-    width: 100vw; 
+    width: 100%; 
     justify-content: space-between; 
     position:absolute; 
     top:0;
@@ -167,3 +167,66 @@ ol li {
     font-size: 150%;
     display: none;
 }
+
+/* Media query styling */
+@media screen and (max-width: 980px) {
+
+    main {
+        width: 90%;
+    }
+
+    #a,
+    #b,
+    #c,
+    #d {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    header {
+        font-size: 20px;
+    }
+
+    h1 {
+        font-size: 200%;
+    }
+
+    h2 {
+        font-size: 150%;
+    }
+
+    ol {
+        width: 100%;
+    }
+
+    ol li {
+        width:100%;
+    }
+
+    .form {
+        flex-direction: column;
+        font-size: 150%;
+
+    }
+
+    .high-scores {
+        width: 90%;
+        font-size: 150%;
+    }
+
+    #input {
+        margin: 15px auto;
+    }
+
+    #a,
+    #b,
+    #c,
+    #d {
+        width: 100%;
+    }
+
+    
+}
+    
