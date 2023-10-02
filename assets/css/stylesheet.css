@@ -136,6 +136,10 @@ ol li {
     cursor:pointer;
 }
 
+#start:hover {
+    background-color: #BD60E7;
+}
+
 #a,
 #b,
 #c, 
