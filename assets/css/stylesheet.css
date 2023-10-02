@@ -185,6 +185,25 @@ ol li {
     #d {
         width: 50%;
     }
+
+    #start:hover {
+        background-color: #351C75;
+    }
+
+    #a:hover,
+    #b:hover,
+    #c:hover, 
+    #d:hover {
+        background-color: #351C75;
+    }
+
+    .high-scores button:hover {
+        background: #351C75;
+    }
+
+    .form button:hover {
+        background: #351C75;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -230,7 +249,5 @@ ol li {
     #d {
         width: 100%;
     }
-
-    
 }
     
