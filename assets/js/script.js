@@ -1,6 +1,5 @@
-
-// =========================== Defining elements as variables ==============================
-
+// =========================== Defining elements as variables ============================
+// =======================================================================================
 var headEl = document.getElementById('header');
 var highScoresEl = document.getElementById('high-scores');
 var timerEl = document.getElementById('timer');
@@ -20,9 +19,8 @@ var hiScoreDiv = document.querySelector('.high-scores');
 var olEl = document.getElementById('ol');
 var homeEl = document.getElementById('home');
 var clearEl = document.getElementById('clear');
-
-// ================================= Global variables =========================================
-
+// ================================= Global variables ====================================
+// =======================================================================================
 var allQuestions = jsQuestions; 
 var currentQuestion;
 var questionIndex;
@@ -33,10 +31,11 @@ var timerInterval;
 var highScores = [];
 var newHighScore = {initials, score};
 var sortedHighScores = [];
+// ================================== Functions ==========================================
+// =======================================================================================
 
-// ====================================== Functions ======================================
-
-// =============== Function for Landing page ======================
+// =========================== Function for Landing page =================================
+// =======================================================================================
 function init() {
 
   questionIndex = 0;
@@ -50,10 +49,9 @@ function init() {
   h2El.setAttribute('style', 'display:block;');
   highScoresEl.setAttribute('style', 'display:block;');
 
-
-return };
-
-// ================ Function for starting the quiz =================
+};
+// =========================== Function for starting the quiz ============================
+// =======================================================================================
 function startQuiz() {
 
     console.log(`Quiz Started`);
@@ -65,8 +63,8 @@ function startQuiz() {
     choicesEl.setAttribute('style', 'display:flex;');
     generateQuestion();
 };
-
-// =================== Function for timer ==============================
+// ========================== Function for timer =========================================
+// =======================================================================================
 function startTimer() {
 
   secondsLeft = 60;
@@ -80,10 +78,9 @@ function startTimer() {
         submitScore()
       }
   
-    }, 1000)};
-
-
-//  ================== Generate question ============================
+}, 1000)};
+//  ============================= Generate question ======================================
+// =======================================================================================
 function generateQuestion() {
 
   if (questionIndex < 5) {
@@ -112,8 +109,8 @@ function generateQuestion() {
     clearInterval(timerInterval);
     submitScore();
 }};
-
-// ================ Check answer ==================
+// =================================== Check answer ======================================
+// =======================================================================================
 function checkAnswer(event) {
 
   console.log(event.target.dataset.answer);
@@ -134,9 +131,9 @@ function checkAnswer(event) {
   };
 
   generateQuestion();
-};
-
-// ============= Function to send message then hide again ======================
+}
+// =================== Function to send message then hide again ==========================
+// =======================================================================================
 function sendMessage(text, color) {
 
   footEl.innerHTML = text;
@@ -147,9 +144,8 @@ function sendMessage(text, color) {
 function hideMessage() {
   footEl.setAttribute('style', 'display:none;')
 }
-
-
-// ============== submit score =======================
+// =============================== submit score ==========================================
+// =======================================================================================
 function submitScore() {
   score = secondsLeft;
   h1El.innerHTML = 'All done!';
@@ -178,8 +174,8 @@ function submitScore() {
     showHighScores();
   });
 }
-
-// ==================== Show high scores ==========================
+// ============================== Show high scores =======================================
+// =======================================================================================
 function showHighScores() {
 
   clearInterval(timerInterval);
@@ -188,9 +184,9 @@ function showHighScores() {
   timerEl.setAttribute('style', 'display:none;');
   submitForm.setAttribute('style', 'display:none;');
   btnEl.setAttribute('style', 'display:none;');
-  hiScoreDiv.setAttribute('style', 'display:flex;');
   highScoresEl.setAttribute('style', 'display:none;');
-  choicesEl.setAttribute('style', 'display:none;')
+  choicesEl.setAttribute('style', 'display:none;');
+  hiScoreDiv.setAttribute('style', 'display:flex;');
 
 
   highScores = getHighScores();
@@ -212,20 +208,20 @@ function showHighScores() {
   clearEl.addEventListener('click', clearData)
 
 };
-
-// ====================== Add high score =======================
+// ================================ Add high score =======================================
+// =======================================================================================
 function addHighScore(newHighScore) {
   highScores = getHighScores();
   highScores.push(newHighScore);
   addData(highScores);
 }
-
-// ================= Store high scores ======================
+// ============================= Store high scores =======================================
+// =======================================================================================
 function addData() {
   localStorage.setItem('highScores', JSON.stringify(highScores));
 }
-
-// ===================== Retrieve high scores ====================
+// ============================= Retrieve high scores ====================================
+// =======================================================================================
 function getHighScores() {
   var storedHighScores = localStorage.getItem('highScores');
   var emptyArr = [];
@@ -234,24 +230,24 @@ function getHighScores() {
   } else {
     return emptyArr;
   }
-
 }
-
-// ================== Sort high scores =======================
+// ================================ Sort high scores =====================================
+// =======================================================================================
 function sortHighScores() {
   highScores.sort((a,b)=>b.score-a.score);
   return highScores;
 }
-
-// ==================== Clear high scores =====================
+// =============================== Clear high scores =====================================
+// =======================================================================================
 function clearData() {
   localStorage.clear();
   sendMessage('High scores cleared!', 'black');
   reloadPage();
 }
-
+// =============Refresh page - effectivly bringing yu back to landing page================
+// =======================================================================================
 function reloadPage() {
   location.reload()
 }
-
+// ==================== Initialize function runs on page load ============================
 init();
