@@ -3,40 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!----------------- Stylesheets ---------------------->
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/stylesheet.css">
     <title>Code Quiz</title>
 </head>
 <body>
+    <!--------- View high scores link and timer ---------->
     <header id="header">
         <p id="high-scores" href="">View high scores</p>
         <div id="timer"></div>
     </header>
+    <!--------------- h1 and start button ---------------->
     <main id="main">
         <h1 id="h1"></h1>
         <h2 id="h2"></h2>
         <button id="start">Start Quiz</button>
-    <!-- Questions list -->
+    <!---------------- Questions list --------------------->
         <div class="container">
             <button id="a" data-answer=""></button>
             <button id="b" data-answer=""></button>
             <button id="c" data-answer=""></button>
             <button id="d" data-answer=""></button>
         </div>
-    <!-- Submit initials form -->
+    <!-------------- Submit initials form ------------------->
         <div class="form">
             Enter initials:
             <input type="text" id="input">
             <button id="submit">Submit</button>
         </div>
+    <!-------------------- High scores ---------------------->
         <div class="high-scores">
             <ol id="ol"></ol>
             <button id="home">Home</button>
             <button id="clear">Clear high scores</button>
         </div>
-    <!-- Footer -->
+    <!-------------------- Footer ---------------------------->
         <footer id="footer"></footer>
     </main>
+    <!--------------------- Script --------------------------->
     <script src="./assets/js/questions.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>

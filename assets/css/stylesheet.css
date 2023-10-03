@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-/* Element selectors  */
+/* =========== Element selectors =========== */
 
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -51,7 +51,7 @@ ol li {
     list-style-type: decimal;
 }
 
-/* Class Selectors */
+/* ================= Class Selectors =================== */
 .container {
     display: none;
     margin-bottom: 40px;
@@ -118,7 +118,7 @@ ol li {
     background: #BD60E7;
 }
 
-/* ID selectors */
+/* ===================== ID selectors ==================== */
 #timer {
     position:absolute; 
     right:20px;
@@ -172,7 +172,7 @@ ol li {
     display: none;
 }
 
-/* Media query styling */
+/* ==================== Media query styling ====================== */
 @media screen and (max-width: 980px) {
 
     main {
